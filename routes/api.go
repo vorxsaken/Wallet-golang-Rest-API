@@ -12,6 +12,7 @@ var userController = controllers.UsersController{}
 var authController = controllers.AuthController{}
 var walletController = controllers.WalletController{}
 var productController = controllers.ProductController{}
+var transactionController = controllers.TransactionController{}
 
 func SetupRoutes(router *gin.Engine) {
 	api := router.Group("/api")
@@ -53,6 +54,12 @@ func SetupRoutes(router *gin.Engine) {
 			product.GET("/:id", middleware.RoleMiddleware("admin", "user"), productController.GetProductByID)
 			product.PUT("/:id", middleware.RoleMiddleware("admin"), productController.UpdateProduct)
 			product.DELETE("/:id", middleware.RoleMiddleware("admin"), productController.DeleteProduct)
+		}
+
+		// apis for transactions
+		transaction := api.Group("/transaction")
+		{
+			transaction.POST("/", middleware.RoleMiddleware("admin", "user"), transactionController.InitiateTransaction)
 		}
 	}
 }
