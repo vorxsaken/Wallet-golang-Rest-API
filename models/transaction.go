@@ -13,9 +13,11 @@ type TransactionType struct {
 type Transaction struct {
 	gorm.Model
 	WalletID          uint            `json:"wallet_id"`
+	ProductID         uint            `json:"product_id"`
 	Amount            float64         `json:"amount"`
 	BalanceAfter      float64         `json:"balance_after"`
 	Description       string          `json:"description"`
+	ProductStock      int             `json:"product_stock"`
 	TransactionTypeID uint            `json:"transaction_type_id"`
 	TransactionType   TransactionType `gorm:"foreignkey:TransactionTypeID"`
 }
