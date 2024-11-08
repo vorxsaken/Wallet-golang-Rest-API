@@ -23,7 +23,7 @@ func (s *ProductController) CreateProduct(c *gin.Context) {
 	}
 
 	// Create product using the service
-	product, err := productService.CreateProduct(input.Name, input.Description, input.Price, input.Availability)
+	product, err := productService.CreateProduct(input.Name, input.Description, input.Price, input.Availability, input.Stock)
 	if err != nil {
 		log.Println("Error creating product:", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create product"})
@@ -72,7 +72,7 @@ func (s *ProductController) UpdateProduct(c *gin.Context) {
 	productIDUint, _ := strconv.ParseUint(id, 10, 32)
 
 	// Update product using the service
-	product, err := productService.UpdateProduct(uint(productIDUint), input.Name, input.Description, input.Price, input.Availability)
+	product, err := productService.UpdateProduct(uint(productIDUint), input.Name, input.Description, input.Price, input.Availability, input.Stock)
 	if err != nil {
 		log.Println("Error updating product:", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update product"})

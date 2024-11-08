@@ -9,4 +9,5 @@ type Product struct {
 	Description  string  `json:"description" gorm:"type:varchar(255)"`
 	Price        float64 `json:"price" gorm:"type:decimal(10,2);not null"`
 	Availability bool    `json:"availability" gorm:"default:true"` // Availability (true = available, false = out of stock)
+	Stock        int     `json:"stock"`
 }

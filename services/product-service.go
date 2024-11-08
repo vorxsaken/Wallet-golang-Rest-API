@@ -11,12 +11,13 @@ import (
 type ProductService struct{}
 
 // Create a new product
-func (s *ProductService) CreateProduct(name, description string, price float64, availability bool) (*models.Product, error) {
+func (s *ProductService) CreateProduct(name, description string, price float64, availability bool, stock int) (*models.Product, error) {
 	product := models.Product{
 		Name:         name,
 		Description:  description,
 		Price:        price,
 		Availability: availability,
+		Stock:        stock,
 	}
 
 	if err := database.DB.Create(&product).Error; err != nil {
@@ -48,7 +49,7 @@ func (s *ProductService) GetProductByID(id uint) (*models.Product, error) {
 }
 
 // Update a product
-func (s *ProductService) UpdateProduct(id uint, name, description string, price float64, availability bool) (*models.Product, error) {
+func (s *ProductService) UpdateProduct(id uint, name, description string, price float64, availability bool, stock int) (*models.Product, error) {
 	var product models.Product
 	if err := database.DB.First(&product, id).Error; err != nil {
 		return nil, err
@@ -58,6 +59,7 @@ func (s *ProductService) UpdateProduct(id uint, name, description string, price 
 	product.Description = description
 	product.Price = price
 	product.Availability = availability
+	product.Stock = stock
 
 	if err := database.DB.Save(&product).Error; err != nil {
 		return nil, err

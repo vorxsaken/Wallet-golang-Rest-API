@@ -7,6 +7,7 @@ type CreateProductInput struct {
 	Description  string  `json:"description" binding:"max=255"`
 	Price        float64 `json:"price" binding:"required,gt=0"`
 	Availability bool    `json:"availability" binding:"required"`
+	Stock        int     `json:"stock" binding:"required"`
 }
 
 // UpdateProductInput struct to receive product update requests
@@ -15,4 +16,5 @@ type UpdateProductInput struct {
 	Description  string  `json:"description" binding:"max=255"`
 	Price        float64 `json:"price" binding:"required,gt=0"`
 	Availability bool    `json:"availability"`
+	Stock        int     `json:"stock" binding:"required"`
 }
